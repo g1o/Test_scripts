@@ -142,3 +142,22 @@ tsne_plots[[2]][[1]]
 E3Cd2_genes<-names(unlist(pan$genes[,2])[grep("E3Cd2",unlist(pan$genes[,2]))])
 pan$genes[E3Cd2_genes]
 write.table(pan$clusters$cluster,file="clusters.tsv")
+
+
+#############try grouping with pcoa
+jac_accessory_dist <- proxy::dist(pan$pan_matrix[,names(pan$shell_genes)] , by_rows = TRUE, method = "Jaccard")
+mds <- cmdscale(jac_accessory_dist,eig = T)
+colnames(mds$points) <- c("x","y")
+ggplot(mds$points,aes(x=x,y=y,label=rownames(mds$points))) + geom_point()
+
+jac_accessory_dist <- proxy::dist(pan$pan_matrix[, bacmet_clusters_blast_hit[,1] ] , by_rows = TRUE, method = "Jaccard")
+mds <- cmdscale(jac_accessory_dist,eig = T)
+colnames(mds$points) <- c("x","y")
+g1 <- mds$points["E3Cd2",]  
+ggplot(mds$points,aes(x=x,y=y,label=rownames(mds$points))) +
+  geom_point() + geom_text(vjust=2) 
+  #geom_text(data=t(g1),label="E3Cd2",vjust=1.4) 
+rowSums(pan$pan_matrix[, bacmet_clusters_blast_hit[,1] ])
+
+
+
