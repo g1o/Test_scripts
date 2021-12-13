@@ -163,6 +163,7 @@ rowSums(pan$pan_matrix[, bacmet_clusters_blast_hit[,1] ])
 
 many_genes<-colSums(pan$pan_matrix[, bacmet_clusters_blast_hit[,1] ])
 #then check exclusive metal genes sum
-pan$pan_matrix[, bacmet_clusters_blast_hit[,1] ]["E3Cd2",many_genes==1] 
+e3cd2_exclusive<-pan$pan_matrix[, bacmet_clusters_blast_hit[,1] ]["E3Cd2",many_genes==1]
+e3cd2_exclusive<-e3cd2_exclusive[e3cd2_exclusive>0]
 rowSums( pan$pan_matrix[, bacmet_clusters_blast_hit[,1] ][,many_genes==1] )
 
